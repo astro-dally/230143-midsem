@@ -1,0 +1,121 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part A",
+    "submission_date": "2026-03-01"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-5",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-01",
+      "tool_name": "ChatGPT",
+      "model": "GPT-5",
+      "purpose": "Checking eligibility",
+      "prompt": "Does the paper 'Training and Testing Low-degree Polynomial Data Mappings via Linear SVM' satisfy the venue, year, and method constraints of Part A?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Confirmed that JMLR 2010 is CORE A* and the method is SVM-based.",
+      "student_verification": "I verified publication details on the JMLR website and confirmed the SVM focus from the paper.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-01",
+      "tool_name": "ChatGPT",
+      "model": "GPT-5",
+      "purpose": "Understanding methodological contribution",
+      "prompt": "What is the main methodological contribution of this paper compared to standard kernel SVM?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Clarified how explicit polynomial mappings reduce kernel computation cost while preserving accuracy.",
+      "student_verification": "I reviewed the sections discussing computational complexity and mapping construction.",
+      "confidence_level": 4
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-01",
+      "tool_name": "ChatGPT",
+      "model": "GPT-5",
+      "purpose": "Analyzing trade-offs",
+      "prompt": "What are the computational trade-offs between using explicit polynomial feature mappings and kernel SVM?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Helped identify memory vs computation trade-offs and scalability aspects.",
+      "student_verification": "I cross-checked this with the experimental comparison results in the paper.",
+      "confidence_level": 4
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-01",
+      "tool_name": "ChatGPT",
+      "model": "GPT-5",
+      "purpose": "Failure case reasoning",
+      "prompt": "In what situations might low-degree polynomial mappings underperform compared to kernel SVM?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Helped identify potential limitations when data requires high-degree nonlinear separation.",
+      "student_verification": "I reviewed the discussion and considered cases with highly complex decision boundaries.",
+      "confidence_level": 4
+    },
+    {
+      "interaction_id": 5,
+      "date": "2026-03-01",
+      "tool_name": "ChatGPT",
+      "model": "GPT-5",
+      "purpose": "Reproducibility evaluation",
+      "prompt": "Can the experiments in this paper be reasonably reproduced on a CPU using public datasets?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Confirmed that datasets like MNIST and UCI can be used with linear SVM solvers.",
+      "student_verification": "I confirmed that the datasets mentioned are public and can be substituted if necessary.",
+      "confidence_level": 5
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 3,
+      "prompt": "What are the computational trade-offs between using explicit polynomial feature mappings and kernel SVM?",
+      "why_important": "Helped understand scalability and complexity trade-offs."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 4,
+      "prompt": "In what situations might low-degree polynomial mappings underperform compared to kernel SVM?",
+      "why_important": "Identified potential failure modes."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 2,
+      "prompt": "What is the main methodological contribution of this paper compared to standard kernel SVM?",
+      "why_important": "Clarified the novelty of the approach."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 1,
+      "prompt": "Does the paper satisfy the venue, year, and method constraints of Part A?",
+      "why_important": "Ensured eligibility under exam rules."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 5,
+      "prompt": "Can the experiments in this paper be reasonably reproduced on a CPU using public datasets?",
+      "why_important": "Confirmed feasibility for Part B."
+    }
+  ],
+
+  "student declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Part A.",
+    "understanding acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-01"
+  }
+}
