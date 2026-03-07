@@ -1,0 +1,69 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 3.1",
+    "submission_date": "2026-03-08"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "provider": "Anthropic (via VS Code Copilot)"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 3.1",
+      "purpose": "Setting up the no-interaction ablation efficiently",
+      "prompt": "For my ablation study I need to remove the interaction terms x_i*x_j from the degree-2 polynomial mapping and keep only the linear + squared features. I know from Equation (5) that the full mapping has n linear, n squared, and n(n-1)/2 interaction terms. Since without interactions the features are just [x_1,...,x_n, x_1^2,...,x_n^2], I can construct this via scipy.sparse hstack of the original features and their elementwise squares. Confirm this is equivalent and generate the code.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Confirmed my approach was correct — removing interactions is equivalent to hstack([X, X.multiply(X)]) for sparse matrices, which avoids constructing the full polynomial mapping first.",
+      "student_verification": "I verified by comparing dimensions: full mapping produces n + n(n+1)/2 = 3000 + 4,501,500 = 4,504,500 features, while the no-interaction version produces 2n = 6,000 features. The accuracy drop (87.37% → 86.21%) confirmed the interaction terms carry information.",
+      "code_used_verbatim": false,
+      "student_modification": "I wrote the timing measurements and the results printing myself. Also added the comparison table structure to quantify the accuracy drop precisely.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 3.1",
+      "purpose": "Computing squared-term column indices for ablation 2",
+      "prompt": "For ablation 2, I need to remove the n squared terms (x_i^2) from the full polynomial mapping while keeping the linear and interaction terms. I can't use poly.powers_ because for n=3000 that would be a 4.5M x 3000 dense array. Instead I need to compute which column indices in the PolynomialFeatures output correspond to squared terms. The ordering is: first n linear features, then degree-2 terms grouped by first index — for index i: x_i^2, x_i*x_{i+1}, ..., x_i*x_{n-1}. So x_i^2 is at offset n + sum_{k=0}^{i-1}(n-k). Help me compute these indices.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Helped me work through the index arithmetic for the PolynomialFeatures column ordering. The squared term x_i^2 is the first entry in each group of (n-i) terms starting at position n + cumulative offset.",
+      "student_verification": "I checked the result: exactly 3000 squared indices were identified out of 4,504,500 total features. The resulting ablated model had 4,501,500 features and achieved 87.32% accuracy — nearly identical to the full mapping's 87.37%, confirming squared terms are redundant for TF-IDF data.",
+      "code_used_verbatim": false,
+      "student_modification": "I wrote the offset accumulation loop myself and added the set-based filtering for efficiency. Also wrote the interpretation connecting this to the fact that squaring normalized TF-IDF values (0 ≤ x_i ≤ 1) dampens them, making the information redundant with the linear terms.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 3.1",
+      "purpose": "Visualization code for ablation comparison plots",
+      "prompt": "Generate a side-by-side bar chart comparing accuracy and dimensionality for each ablation. I want to show: (1) accuracy comparison between full and ablated for each ablation, (2) a summary plot with all three bars (full, no-interaction, no-squared). Save to results/ folder as PNG.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the matplotlib subplots layout and bar annotation code.",
+      "student_verification": "Checked that the plot values match the printed results table. Verified the saved PNGs exist in results/.",
+      "code_used_verbatim": true,
+      "student_modification": "Adjusted color schemes and axis limits to make the accuracy differences visually clear despite being small in absolute terms.",
+      "confidence_level": 5
+    }
+  ],
+
+  "overall_reflection": "The ablation study required understanding which components of Equation (5) are separable and how to efficiently construct the ablated feature matrices without exhausting memory. The key insight — that interaction terms are the main contributor while squared terms are redundant for TF-IDF data — emerged directly from running the experiments, not from the LLM. The LLM helped with mechanical coding tasks (sparse matrix operations, matplotlib plotting) but the experimental design and interpretation were my own."
+}

@@ -1,0 +1,84 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 3.2",
+    "submission_date": "2026-03-08"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "provider": "Anthropic (via VS Code Copilot)"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 3.2",
+      "purpose": "Choosing a dataset that violates the sparsity assumption",
+      "prompt": "In Task 1.2 I identified that the paper's method assumes sparse data (n_bar << n, Section 3.3). I want to demonstrate a failure mode by using a dense dataset. MNIST digits have 784 features with many nonzero pixels per image, so n_bar/n is high. I'll use digits 3 vs 8 (visually similar, challenging binary task) with 1000 train / 500 test to keep things manageable. Set up the data loading with MaxAbsScaler to [0,1] range.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the fetch_openml call and the digit filtering/subsetting code.",
+      "student_verification": "I chose MNIST specifically because I calculated n_bar ≈ 170 out of n = 784, giving n_bar/n ≈ 0.22 — far from the text data ratio of < 0.01. Also verified the mapped dimension n_hat ≈ n_bar^2/2 ≈ 14,450 is large enough to hurt but small enough not to OOM.",
+      "code_used_verbatim": false,
+      "student_modification": "Added the sparsity analysis section comparing MNIST to text data, including the n_hat vs l*n_bar cost comparison from Equation (10) to analytically predict the slowdown before running the experiments.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 3.2",
+      "purpose": "Comparing explicit mapping vs kernel SVM on dense data",
+      "prompt": "Run three methods on the MNIST binary data: (1) explicit degree-2 poly mapping + LinearSVC, (2) polynomial kernel SVM with degree=2, gamma=1, coef0=1, (3) RBF kernel SVM. Time each one including mapping overhead for method 1. I expect the explicit mapping to be slower than the kernel SVM because n_hat is too large for per-iteration savings to outweigh mapping cost.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Generated the boilerplate for training and timing three SVM variants.",
+      "student_verification": "Results confirmed my prediction: explicit mapping took 1.73s total vs kernel poly SVM's 0.27s — 6.4x slower. The mapping step alone (0.34s) already exceeds the kernel SVM's total time. This directly validates that violating the sparsity assumption from Section 3.3 eliminates the method's advantage.",
+      "code_used_verbatim": true,
+      "student_modification": "Added the RBF kernel variant to show that a completely different kernel can also outperform the explicit mapping approach on dense data. Wrote the results table formatting.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-08",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 3.2",
+      "purpose": "PCA dimensionality reduction as a fix",
+      "prompt": "I want to show that PCA before polynomial mapping can fix the dense-data failure. Reduce MNIST from 784 to 50 principal components, then apply degree-2 polynomial mapping. This should bring the mapped dimension down to about 1325 and restore the speed advantage. Generate the code for the PCA + poly pipeline.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the PCA + PolynomialFeatures pipeline code.",
+      "student_verification": "The fix worked as expected: PCA retained 83.5% of variance, mapped dimension dropped to 1,325, total train time was 0.18s (faster than kernel SVM), and accuracy was 98.20% — actually higher than the kernel SVM. This confirms that the fix restores the paper's intended speedup by artificially creating the sparse/low-dimensional conditions the method requires.",
+      "code_used_verbatim": true,
+      "student_modification": "I chose n_components=50 based on the scree plot (not shown) — 50 components capture enough variance while keeping the mapped dimension at ~1325, well within the regime where explicit mapping is efficient.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-08",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 3.2",
+      "purpose": "Visualization of PCA fix comparing all methods",
+      "prompt": "Create a 3-panel figure for the PCA fix: (1) bar chart of accuracy for all 4 methods (explicit, poly kernel, RBF kernel, PCA+poly), (2) training time comparison showing the PCA fix is fastest, (3) mapped dimensionality comparison on log scale showing 308K vs 1325 features. Annotate the failure and fix on the timing chart. Save to results/task_3_2_pca_fix.png.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Generated the matplotlib subplot layout and bar annotation code.",
+      "student_verification": "Verified the plot correctly shows: (a) all methods achieve ~97-98% accuracy confirming Theorem 1 equivalence holds, (b) PCA+poly is fastest at 0.18s while direct explicit is slowest at 1.73s, (c) dimension reduction from 308K to 1.3K explains the speed recovery.",
+      "code_used_verbatim": true,
+      "student_modification": "Added the log-scale dimension comparison panel and specific annotation text explaining the failure/fix. Also clarified in the markdown that accuracy similarity is expected from Theorem 1 of the paper — the failure is about speed, not accuracy.",
+      "confidence_level": 5
+    }
+  ],
+
+  "overall_reflection": "The failure mode analysis required connecting the theoretical assumptions from Task 1.2 to a concrete experimental demonstration. I chose MNIST because its sparsity characteristics (n_bar/n ≈ 0.22) directly violate the paper's Section 3.3 requirement (n_bar << n). A key insight was clarifying that the failure is about the speed advantage, not accuracy — the paper's Theorem 1 guarantees mathematical equivalence between explicit mapping and kernel SVM, so both achieve ~98% on MNIST. The LLM helped with data loading and visualization boilerplate, but the choice of failure scenario, the analytical prediction of slowdown using Equation (10), and the PCA fix rationale were my own contributions."
+}
