@@ -1,0 +1,116 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 2.3",
+    "submission_date": "2026-03-08"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "provider": "Anthropic (via VS Code Copilot)"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.3",
+      "purpose": "Formatting results summary and paper comparison table",
+      "prompt": "Print a pandas table of accuracy, training time, and testing time for the three methods already stored in the results dict. Then write a markdown comparison table with the paper's real-sim values from Table 5 — explicit: 98.00% acc / 59.8s, kernel: 98.00% / 1220.5s, plain linear: 97.51% / 0.3s — alongside our actual values.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Produced the pandas DataFrame display code and markdown table template.",
+      "student_verification": "I looked up the paper's Table 5 values myself and specified them in the prompt. Verified the output matches our computed results.",
+      "code_used_verbatim": true,
+      "student_modification": "Wrote the 'Analysis of Differences' paragraph entirely myself, explaining the accuracy gap (noisier binary grouping) and the modest speedup (smaller l than real-sim's 57K). Updated placeholder text to show actual result values.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.3",
+      "purpose": "Generating comparison bar charts",
+      "prompt": "Create a 1x3 subplot figure showing bar charts for (a) accuracy, (b) training time, and (c) testing time for the three methods. Use log scale on the testing time axis since the plain linear SVM test time is orders of magnitude smaller. Save to results/task_2_3_comparison.png at 150 dpi.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Generated the matplotlib plotting boilerplate.",
+      "student_verification": "Confirmed the plotted values match the summary table and that the visual clearly shows the speedup pattern from the paper.",
+      "code_used_verbatim": true,
+      "student_modification": "Adjusted colors, added value annotations on each bar, and tweaked figure size for readability.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.3",
+      "purpose": "Generating side-by-side confusion matrices",
+      "prompt": "Plot three confusion matrices side by side using seaborn heatmaps for the three methods' predictions. Use labels [-1, +1] on the axes. Save to results/task_2_3_confusion.png.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Produced the subplot layout and heatmap code.",
+      "student_verification": "Verified that the confusion matrix values are consistent with the reported accuracy percentages.",
+      "code_used_verbatim": true,
+      "student_modification": "Changed colormap and annotation formatting. Adjusted subplot spacing.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.3",
+      "purpose": "Drafting reproducibility checklist",
+      "prompt": "Write a markdown reproducibility checklist covering: (1) random seeds set and documented, (2) all dependencies in requirements.txt with versions, (3) notebook runs top to bottom without errors, (4) dataset loading requires no manual steps, (5) hyperparameters defined in one place. These are the five items required by the exam specification.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Formatted the checklist as a markdown bullet list.",
+      "student_verification": "I confirmed each item against the actual notebook state before finalising.",
+      "code_used_verbatim": false,
+      "student_modification": "Reworded the items to accurately reflect our specific setup (fetch_20newsgroups, scipy.sparse, etc.) rather than generic descriptions.",
+      "confidence_level": 5
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "Print a pandas table of the results and write a comparison table with the paper's real-sim Table 5 values (which I specified) alongside our values.",
+      "why_important": "Core deliverable — I provided the paper's numbers from my own reading of Table 5."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 2,
+      "prompt": "Create 1x3 bar chart subplots for accuracy, training time, and testing time with log scale on the test axis. Save to results/.",
+      "why_important": "Required visualisation; I specified the log scale because I knew the test-time difference spans orders of magnitude."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "Plot three confusion matrices side by side with labels [-1, +1]. Save to results/.",
+      "why_important": "Additional visualisation providing per-class performance breakdown."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 4,
+      "prompt": "Write a reproducibility checklist covering the five items required by the exam spec: seeds, deps, top-to-bottom, dataset loading, hyperparameters.",
+      "why_important": "Directly required by the exam PDF for Task 2.3."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.3 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-08"
+  }
+}

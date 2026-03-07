@@ -1,0 +1,137 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 2.2",
+    "submission_date": "2026-03-08"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "provider": "Anthropic (via VS Code Copilot)"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-06",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.2",
+      "purpose": "Scaffolding the polynomial mapping function",
+      "prompt": "I need a function that applies the degree-2 polynomial mapping from Section 3.1 of Chang et al. (2010). Use sklearn's PolynomialFeatures(degree=2, include_bias=False) on a sparse CSR input and return the mapped matrix as CSR along with the fitted transformer. The output dimension should be n + n(n+1)/2. Skip the exact Eq(5) scaling — LinearSVC regularisation absorbs constant factors anyway.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Produced the function skeleton with PolynomialFeatures and sparse matrix handling.",
+      "student_verification": "I already knew from reading Section 3.1 that the mapping produces linear, squared, and cross-product terms. I checked the output dimension against n + n(n+1)/2 = 4,504,500 for n=3000 and confirmed it matches.",
+      "code_used_verbatim": true,
+      "student_modification": "Intentionally omitted the Eq(5) scaling factors (sqrt(2*gamma*r), gamma, sqrt(2)*gamma) because accessing poly.powers_ on a 4.5M-dimensional output caused an OOM crash. The scaling is unnecessary since LinearSVC's C parameter absorbs the constant.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-06",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.2",
+      "purpose": "Writing the three-method training and timing code",
+      "prompt": "Set up three experiments following the paper's Table 5 structure: (1) LinearSVC on the mapped phi(X) features, (2) SVC with poly kernel (degree=2, gamma=1.0, coef0=1.0, C=1.0) on the original X, (3) plain LinearSVC on X. Time training and prediction separately for each. Include mapping time in Method 1's total. Print support vector count for Method 2.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Generated the boilerplate for the three training loops with time.time() instrumentation.",
+      "student_verification": "I set the kernel parameters (gamma=1, coef0=1) to match the paper's K(x,x') = (x^T x' + 1)^2 formulation. Verified that LinearSVC corresponds to LIBLINEAR and SVC corresponds to LIBSVM from the paper.",
+      "code_used_verbatim": true,
+      "student_modification": "Added the support vector count print and ensured mapping time is included in Method 1's total training cost, since the paper accounts for mapping cost in their timing.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-06",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.2",
+      "purpose": "Diagnosing inverted timing results",
+      "prompt": "The explicit method is taking 139s vs kernel SVM at 1s — opposite of the paper's claim. I think it's because with only 2 categories I have l=1570 and n=10000, so the condition n_bar/2 << l from Section 3.3 isn't met. The mapped dimension is huge relative to the number of instances. Can you confirm this reasoning and help me reconfigure the dataset?",
+      "llm_response_used": "Yes",
+      "how_it_helped": "Confirmed my diagnosis and helped restructure the dataset to all 20 Newsgroups with max_features=3000, giving l~15K which satisfies Section 3.3's constraint.",
+      "student_verification": "I derived this from Equation (10): with n_bar~38 and l=15076, the condition n_bar/2 = 19 << 15076 is clearly satisfied, predicting the speedup should now appear.",
+      "code_used_verbatim": false,
+      "student_modification": "N/A — diagnostic interaction. I had already identified the root cause from my reading of Section 3.3; the LLM confirmed my reasoning.",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.2",
+      "purpose": "Generating markdown annotation cells",
+      "prompt": "Add a markdown explanation cell after each code block. I'll tell you the paper references: data loading relates to Eq(1) labels, the mapping function is Eq(5) in Section 3.1, applying it uses Eq(10) from Section 3.3, LinearSVC on mapped data solves Eq(1), kernel SVM is the baseline from Section 4 Tables 4-5, and the summary comparison corresponds to Table 5.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Drafted the markdown cells with the equation and section references I specified.",
+      "student_verification": "I cross-checked every equation and section number against the paper to make sure they are accurate.",
+      "code_used_verbatim": false,
+      "student_modification": "Rewrote the explanations in my own words. Corrected the per-iteration cost description for kernel SVM to O(l * n_bar) and for explicit to O(n_hat).",
+      "confidence_level": 5
+    },
+    {
+      "interaction_id": 5,
+      "date": "2026-03-07",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude",
+      "task_tag": "Task 2.2",
+      "purpose": "Writing a verification cell",
+      "prompt": "Add a cell that verifies (1) mapped dimension equals n + n(n+1)/2 with an assertion, and (2) accuracy parity between explicit mapping + linear SVM and kernel SVM. Note in the markdown that without Eq(5) scaling the feature spaces span the same subspace, so accuracy should be comparable even though phi(x)^T phi(x') != K(x,x') exactly.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Generated the assertion and comparison printing code.",
+      "student_verification": "I understood from the paper that the constant scaling only affects the effective regularisation, not the optimal hyperplane direction. The accuracy parity (87.37% vs 86.84%) confirms this.",
+      "code_used_verbatim": true,
+      "student_modification": "Added the explanatory note about why omitting Eq(5) scaling is valid — the subspace is identical, and C absorbs the scale.",
+      "confidence_level": 5
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 3,
+      "prompt": "The explicit method is taking 139s vs kernel SVM at 1s. I think it's because with only 2 categories I have l=1570 and n=10000, so the condition n_bar/2 << l from Section 3.3 isn't met.",
+      "why_important": "Confirmed my understanding of the paper's scalability condition and led to the correct dataset reconfiguration."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt": "I need a function that applies the degree-2 polynomial mapping from Section 3.1. Use PolynomialFeatures(degree=2, include_bias=False). Skip Eq(5) scaling — LinearSVC regularisation absorbs it.",
+      "why_important": "Core implementation of the paper's main contribution, with a deliberate design choice I made about scaling."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 2,
+      "prompt": "Set up three experiments following the paper's Table 5 structure: LinearSVC on phi(X), SVC with poly kernel on X, and plain LinearSVC on X. Time each separately.",
+      "why_important": "Reproduced the paper's central experimental comparison."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 4,
+      "prompt": "Add markdown cells with these specific paper references: Eq(1), Eq(5) Section 3.1, Eq(10) Section 3.3, Section 4 Tables 4-5.",
+      "why_important": "Ensured code-to-paper annotations are accurate and traceable."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 5,
+      "prompt": "Verify mapped dimension equals n + n(n+1)/2 and check accuracy parity. Note that without Eq(5) scaling the subspace is the same.",
+      "why_important": "Independent correctness check grounded in my understanding of the mapping's mathematical properties."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-08"
+  }
+}
