@@ -1,0 +1,24 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task": "Task 1.2",
+    "submission_date": "2026-03-08"
+  },
+
+  "llm_tools_used": [],
+
+  "full_llm_interaction_log": [],
+
+  "top_5_prompts": [],
+
+  "student_declaration": {
+    "statement": "I declare that no LLM was used for Task 1.2 of Part B. The assumptions, violation scenarios, and paper references were written entirely by me based on my reading of the paper.",
+    "understanding_acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-08"
+  }
+}
