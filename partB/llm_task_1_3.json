@@ -1,0 +1,110 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task_tag": "Task 1.3 – Baseline and Improvement Analysis",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "provider": "Anthropic (via GitHub Copilot)"
+    }
+  ],
+
+  "code_used_verbatim": false,
+  "student_modification": "Not applicable because no code was generated.",
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Identifying the baseline method used in the paper",
+      "prompt": "What is the baseline method in the paper Learning Kernels with Radiuses of Minimum Enclosing Balls? How does standard margin-based MKL work?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Clarified that the baseline is margin-based Multiple Kernel Learning which jointly optimises kernel weights and an SVM classifier by maximising the margin, and that the paper compares against Unif, MKL, and KL-C variants.",
+      "student_verification": "I confirmed by reading Section 2 (Eqs. 3–5) and the experiment setup in Section 6 (Table 1, Indices 1–6).",
+      "confidence_level": 5,
+      "task_tag": "Task 1.3 – Baseline and Improvement Analysis",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because no code was generated."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Understanding the scaling problem and initialisation problem in margin-based MKL",
+      "prompt": "Explain the scaling problem and the initialisation problem described in Section 2.1. Why does multiplying a kernel by a scalar reduce the MKL objective, and how do initial basis kernel scales affect the solution?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Explained that scaling a kernel by a > 1 shrinks ||w||² by 1/a without changing the classifier, so any kernel can look good by inflating its scale. Also explained the initialisation problem: rescaling a basis kernel by a small factor can flip which kernel MKL selects, even under a norm constraint.",
+      "student_verification": "I verified both problems by working through the derivation in Section 2.1 and the two-kernel example in Eq. 6.",
+      "confidence_level": 5,
+      "task_tag": "Task 1.3 – Baseline and Improvement Analysis",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because no code was generated."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Reasoning about scenarios where the proposed RKL method may fail",
+      "prompt": "Can you think of a scenario where the Radius-based Kernel Learning method would not outperform the margin-based baseline? What if the dataset has outliers?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Pointed out that outliers in feature space can inflate the MEB radius R²(k), causing the RKL objective to favour kernels that shrink the feature space rather than those that separate classes well. Also noted that on the Wpbc dataset (Table 1) RKL does not improve over the baseline, consistent with this reasoning.",
+      "student_verification": "I checked Table 1 and confirmed that RKL achieves 76.5% on Wpbc, identical to Unif and MKL. I also reviewed Eqs. 7–8 to understand how outliers dominate the MEB dual solution.",
+      "confidence_level": 4,
+      "task_tag": "Task 1.3 – Baseline and Improvement Analysis",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because no code was generated."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt": "Explain the scaling problem and the initialisation problem described in Section 2.1. Why does multiplying a kernel by a scalar reduce the MKL objective, and how do initial basis kernel scales affect the solution?",
+      "why_important": "Understanding both problems is the foundation for appreciating why the paper proposes a new formulation."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt": "What is the baseline method in the paper Learning Kernels with Radiuses of Minimum Enclosing Balls? How does standard margin-based MKL work?",
+      "why_important": "Clearly identifying the baseline is necessary before discussing what the paper improves."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "Can you think of a scenario where the Radius-based Kernel Learning method would not outperform the margin-based baseline? What if the dataset has outliers?",
+      "why_important": "Critical thinking about failure modes demonstrates deeper understanding of the method's limitations."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt": "Why does a norm constraint on theta not fully solve the scaling problem in MKL?",
+      "why_important": "This follow-up question clarified the initialisation problem and why norm constraints alone are insufficient."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 1,
+      "prompt": "What is the difference between Unif, MKL, and KL-C baselines in the paper's experiments?",
+      "why_important": "Distinguishing the three baseline variants was needed to accurately describe the experimental comparison."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 1.3 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-12"
+  }
+}

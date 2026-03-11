@@ -1,0 +1,110 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task_tag": "Task 1.2 – Key Assumptions",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "provider": "Anthropic (via GitHub Copilot)"
+    }
+  ],
+
+  "code_used_verbatim": false,
+  "student_modification": "Not applicable because only conceptual explanations were written.",
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-11",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Understanding assumptions behind kernel learning in the RKL framework",
+      "prompt": "What assumptions does the Radius-based Kernel Learning method rely on? Are there implicit assumptions about the kernel family or the data?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Helped identify that the method assumes the linear combination of basis kernels is expressive enough for the task, and that the MEB radius faithfully represents data spread.",
+      "student_verification": "I confirmed these assumptions by reading Section 2 (Eq. 2) and Section 2.2 (Eqs. 7–8) of the paper.",
+      "confidence_level": 4,
+      "task_tag": "Task 1.2 – Key Assumptions",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because only conceptual explanations were written."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-11",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Checking whether kernel matrices must be positive definite for the method to work",
+      "prompt": "Does the kernel matrix K(theta) need to be strictly positive definite for the RKL algorithm? What happens if it is only positive semi-definite?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Clarified that strict positive definiteness is required to ensure unique solutions in both the SVM and MEB dual problems, which in turn guarantees that the top-level objective g(theta) is continuously differentiable (Theorem 1, Section 4).",
+      "student_verification": "I checked the paragraph following Theorem 1 in Section 4, which explicitly states this requirement.",
+      "confidence_level": 5,
+      "task_tag": "Task 1.2 – Key Assumptions",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because only conceptual explanations were written."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Understanding the role of the Minimum Enclosing Ball and when its radius may be misleading",
+      "prompt": "What role does the Minimum Enclosing Ball play in the RKL formulation? Can outliers in feature space cause problems for this approach?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Explained that the MEB radius R²(k) is used to normalise the margin in the objective (Eq. 9), and that outliers can inflate R²(k), distorting the optimisation objective and potentially leading to poor kernel selection.",
+      "student_verification": "I verified by reviewing Equations 7–8 in Section 2.2, which define the MEB primal and dual, and considered how a single far-away point would dominate the dual solution.",
+      "confidence_level": 4,
+      "task_tag": "Task 1.2 – Key Assumptions",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because only conceptual explanations were written."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt": "Does the kernel matrix K(theta) need to be strictly positive definite for the RKL algorithm? What happens if it is only positive semi-definite?",
+      "why_important": "This assumption is critical for the differentiability of the objective and the correctness of the gradient projection algorithm."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt": "What assumptions does the Radius-based Kernel Learning method rely on? Are there implicit assumptions about the kernel family or the data?",
+      "why_important": "Helped identify the key assumptions needed to structure the notebook."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "What role does the Minimum Enclosing Ball play in the RKL formulation? Can outliers in feature space cause problems for this approach?",
+      "why_important": "Understanding failure modes of the MEB radius was essential for writing the violation scenario of Assumption 3."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 1,
+      "prompt": "Is the expressiveness of the basis kernel set an assumption or a design choice in MKL?",
+      "why_important": "Helped clarify that kernel family expressiveness is an implicit assumption that bounds the quality of the learned kernel."
+    },
+    {
+      "rank": 5,
+      "interaction_id": 2,
+      "prompt": "What is the difference between positive definite and positive semi-definite kernel matrices in the context of SVM duals?",
+      "why_important": "Needed to explain why uniqueness of dual solutions matters for Theorem 1."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 1.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-12"
+  }
+}
