@@ -1,0 +1,98 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task_tag": "Task 2.1 – Dataset Selection and Setup",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "provider": "Anthropic (via GitHub Copilot)"
+    }
+  ],
+
+  "code_used_verbatim": false,
+  "student_modification": "Not applicable because the generated suggestions were used only for conceptual guidance.",
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Identifying an appropriate dataset for reproducing kernel learning experiments",
+      "prompt": "Which dataset would be appropriate for reproducing the kernel learning experiments described in the paper Learning Kernels with Radiuses of Minimum Enclosing Balls? I need something that works on a CPU and highlights differences between kernel choices.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested using a synthetic dataset via sklearn.datasets.make_classification with controlled separability, which allows demonstrating kernel behaviour without requiring large external datasets.",
+      "student_verification": "I confirmed that a synthetic dataset is suitable because the paper's contribution is about the learning algorithm, not a specific benchmark, and synthetic data lets me control difficulty and dimensionality.",
+      "confidence_level": 4,
+      "task_tag": "Task 2.1 – Dataset Selection and Setup",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because the generated suggestions were used only for conceptual guidance."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Generating a synthetic classification dataset using sklearn.make_classification",
+      "prompt": "How do I generate a synthetic binary classification dataset using sklearn.datasets.make_classification with moderate difficulty so that different SVM kernels produce visibly different results? I want around 500 samples and 5 features.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided example code using make_classification with parameters such as n_samples=500, n_features=5, n_informative=3, class_sep=1.0, flip_y=0.05, and random_state=42, along with an explanation of how each parameter affects classification difficulty.",
+      "student_verification": "I reviewed the sklearn documentation for make_classification to understand the effect of class_sep and flip_y, and adjusted the values to produce a moderately overlapping dataset where kernel choice matters.",
+      "confidence_level": 4,
+      "task_tag": "Task 2.1 – Dataset Selection and Setup",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because the generated suggestions were used only for conceptual guidance."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Visualising the dataset for explanation in the notebook",
+      "prompt": "How can I visualise a 5-dimensional synthetic classification dataset in a 2D scatter plot for inclusion in a Jupyter notebook? I want to show the first two features coloured by class label and save the figure at 300 dpi.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested using matplotlib to create a scatter plot of the first two features with class-based colouring, and showed how to save the figure using plt.savefig with dpi=300 and bbox_inches='tight'.",
+      "student_verification": "I verified that plotting only the first two features is a standard approach for high-dimensional data visualisation and confirmed the saved figure appears correctly in the results directory.",
+      "confidence_level": 5,
+      "task_tag": "Task 2.1 – Dataset Selection and Setup",
+      "code_used_verbatim": false,
+      "student_modification": "Not applicable because the generated suggestions were used only for conceptual guidance."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt": "How do I generate a synthetic binary classification dataset using sklearn.datasets.make_classification with moderate difficulty so that different SVM kernels produce visibly different results?",
+      "why_important": "This was the most critical prompt because the dataset parameters directly determine whether kernel differences are observable in the experiments."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt": "Which dataset would be appropriate for reproducing the kernel learning experiments described in the paper Learning Kernels with Radiuses of Minimum Enclosing Balls?",
+      "why_important": "Helped decide between using an external benchmark and generating a synthetic dataset tailored to the experiment's needs."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "How can I visualise a 5-dimensional synthetic classification dataset in a 2D scatter plot for inclusion in a Jupyter notebook?",
+      "why_important": "The visualisation is essential for the notebook's explanatory value and for verifying that the dataset has the expected class structure."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.1 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-12"
+  }
+}

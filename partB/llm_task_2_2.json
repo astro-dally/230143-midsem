@@ -1,0 +1,98 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task_tag": "Task 2.2 – Reproduction Experiment",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "provider": "Anthropic (via GitHub Copilot)"
+    }
+  ],
+
+  "code_used_verbatim": false,
+  "student_modification": "Code suggestions were adapted and integrated into the notebook structure.",
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Implementing kernel comparison experiments with SVM",
+      "prompt": "How do I train SVM classifiers with linear, RBF, and polynomial kernels using scikit-learn and compare their accuracy on a test set? I also want to combine their predictions using majority voting.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided a structured approach for training three separate SVC models, evaluating each with accuracy_score, and combining predictions via scipy.stats.mode for majority voting.",
+      "student_verification": "I verified each kernel's behaviour against the scikit-learn documentation and confirmed that majority voting is a valid ensemble strategy for comparing kernel performance.",
+      "confidence_level": 4,
+      "task_tag": "Task 2.2 – Reproduction Experiment",
+      "code_used_verbatim": false,
+      "student_modification": "Code suggestions were adapted and integrated into the notebook structure."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Computing the SVM margin for each kernel",
+      "prompt": "How do I compute the SVM margin from a trained sklearn SVC model? The paper uses margin = 1/||w|| as part of the margin-radius analysis. How can I extract the weight vector norm for linear and non-linear kernels?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Explained that for a linear kernel the weight vector is available via svc.coef_ and the margin is 1/np.linalg.norm(coef_). For non-linear kernels, suggested computing ||w||² from the dual coefficients and support vectors using the kernel matrix approach.",
+      "student_verification": "I cross-checked the margin formula with Equation 1 in the paper and confirmed that margin = 1/||w|| matches the standard SVM geometric margin definition used in Section 2.",
+      "confidence_level": 4,
+      "task_tag": "Task 2.2 – Reproduction Experiment",
+      "code_used_verbatim": false,
+      "student_modification": "Code suggestions were adapted and integrated into the notebook structure."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Approximating the dataset radius and creating the margin-radius experiment",
+      "prompt": "How do I approximate the radius of the minimum enclosing ball for a dataset in feature space? The paper defines R(k) as the radius of the MEB. I want to compute this for each kernel and then plot margin, radius, and their ratio side by side.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested approximating the radius as the maximum Euclidean distance from the dataset centroid to any data point, which serves as an upper bound on the true MEB radius. Also provided guidance on creating a grouped bar chart with matplotlib to visualise margin, radius, and the margin²/radius² ratio across kernels.",
+      "student_verification": "I verified that the centroid-based radius approximation is a reasonable proxy by reviewing the MEB definition in Section 3 of the paper. I also confirmed that the ratio margin²/radius² aligns with the paper's objective function in Equation 9.",
+      "confidence_level": 4,
+      "task_tag": "Task 2.2 – Reproduction Experiment",
+      "code_used_verbatim": false,
+      "student_modification": "Code suggestions were adapted and integrated into the notebook structure."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 3,
+      "prompt": "How do I approximate the radius of the minimum enclosing ball for a dataset in feature space and plot the margin-radius ratio across kernels?",
+      "why_important": "Directly addresses the paper's core contribution — the margin-radius principle — and is the most novel part of the reproduction experiment."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 2,
+      "prompt": "How do I compute the SVM margin from a trained sklearn SVC model using margin = 1/||w||?",
+      "why_important": "Computing the margin correctly is essential for the margin-radius analysis that reproduces the paper's key insight."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 1,
+      "prompt": "How do I train SVM classifiers with linear, RBF, and polynomial kernels and combine their predictions using majority voting?",
+      "why_important": "The kernel comparison experiment forms the baseline for evaluating whether the margin-radius principle identifies the best kernel."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Dally R",
+    "date": "2026-03-12"
+  }
+}
