@@ -1,0 +1,91 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task_tag": "Task 4.1 – Report",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "provider": "Anthropic (via GitHub Copilot)"
+    }
+  ],
+
+  "code_used_verbatim": false,
+  "student_modification": "LLM suggestions were used only for structuring and refining the written report.",
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Organizing the report structure for an IEEE-style LaTeX document",
+      "prompt": "What sections should I include in a 4-page IEEE-style report that summarises reproduction experiments, an ablation study, and a failure mode analysis for the paper Learning Kernels with Radiuses of Minimum Enclosing Balls?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested a logical section ordering: Abstract, Introduction, Method Overview, Dataset and Setup, Reproduction Results, Ablation Study, Failure Mode Analysis, Discussion, Conclusion, and References. This helped organise the report so each experiment maps to a dedicated section.",
+      "student_verification": "I reviewed IEEE conference paper conventions and confirmed that the suggested structure follows standard practice for experimental ML reports, with each section serving a clear purpose.",
+      "confidence_level": 5,
+      "task_tag": "Task 4.1 – Report",
+      "code_used_verbatim": false,
+      "student_modification": "LLM suggestions were used only for structuring and refining the written report."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Summarizing the paper's contribution for the introduction and method overview sections",
+      "prompt": "Write a concise summary of the main contribution of the paper Learning Kernels with Radiuses of Minimum Enclosing Balls for use in an introduction section. Focus on the margin-radius bound, the tri-level optimisation, and how it differs from standard MKL approaches.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided a draft paragraph explaining the margin-radius bound R² · ||w||², the role of the MEB radius in kernel learning, and how the paper's approach differs from margin-only MKL methods. This served as a starting point for the introduction and method overview.",
+      "student_verification": "I cross-checked the summary against the original paper to ensure the bound formulation, the tri-level optimisation description, and the comparison with existing MKL methods were accurately represented.",
+      "confidence_level": 4,
+      "task_tag": "Task 4.1 – Report",
+      "code_used_verbatim": false,
+      "student_modification": "LLM suggestions were used only for structuring and refining the written report."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Writing the reproduction results and discussion sections",
+      "prompt": "Help me write a results section for an IEEE report. The linear SVM achieved 0.97 accuracy, RBF 0.94, polynomial 0.94, and combined 0.95 on a synthetic dataset. The ablation study showed the linear kernel outperformed the combined model. The failure mode experiment dropped accuracy to 0.78. How should I present and discuss these findings?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested presenting results in tables with captions, linking accuracy differences to the dataset's linear separability, and framing the failure mode as a violation of the paper's separability assumption. Also recommended connecting the discussion back to the margin-radius bound.",
+      "student_verification": "I verified that all accuracy values matched the notebook outputs, ensured the tables were correctly formatted in LaTeX, and confirmed that the discussion points accurately reflected the experimental observations without overstating conclusions.",
+      "confidence_level": 4,
+      "task_tag": "Task 4.1 – Report",
+      "code_used_verbatim": false,
+      "student_modification": "LLM suggestions were used only for structuring and refining the written report."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "What sections should I include in a 4-page IEEE-style report summarising reproduction experiments, an ablation study, and a failure mode analysis?",
+      "why_important": "This prompt established the overall report structure and ensured all experimental findings had dedicated sections within the page limit."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 2,
+      "prompt": "Write a concise summary of the main contribution of the paper for the introduction section, focusing on the margin-radius bound and tri-level optimisation.",
+      "why_important": "Accurately summarising the paper's contribution was essential for grounding the entire report in the correct theoretical context."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "Help me write a results section presenting kernel comparison accuracies, ablation findings, and the failure mode experiment.",
+      "why_important": "This prompt helped structure the quantitative results clearly with tables and connect them to the paper's theoretical framework in the discussion."
+    }
+  ]
+}

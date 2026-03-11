@@ -1,0 +1,70 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task_tag": "Task 4.2 – LLM Usage Disclosure",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "provider": "Anthropic (via GitHub Copilot)"
+    }
+  ],
+
+  "code_used_verbatim": false,
+  "student_modification": "LLM outputs were used for guidance and explanations; code and experiments were implemented and modified by the student.",
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Verifying repository completeness before submission",
+      "prompt": "Verify that my partB/ directory contains all required files: task notebooks (task_2_1 through task_3_2), LLM disclosure JSONs for each task, a data/ folder with README.md, a results/ folder with all saved figures, requirements.txt, and the report.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Listed all files present in the partB/ directory and confirmed that every required notebook, JSON, figure, and supporting file was accounted for. Identified additional files (task_1_x notebooks and their JSONs) that were also present.",
+      "student_verification": "I manually checked the directory listing against the assignment specification to confirm nothing was missing and that no extraneous files needed to be removed.",
+      "confidence_level": 5,
+      "task_tag": "Task 4.2 – LLM Usage Disclosure",
+      "code_used_verbatim": false,
+      "student_modification": "LLM outputs were used for guidance and explanations; code and experiments were implemented and modified by the student."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Checking report structure and submission requirements",
+      "prompt": "Does my IEEE-style LaTeX report cover all required sections? It should include an abstract, introduction, method overview, dataset setup, reproduction results, ablation study, failure mode analysis, discussion, conclusion, and references. It must fit within 4 pages excluding references.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Confirmed that the report contains all required sections in the correct order and that the content fits within the 4-page constraint. Also verified that figure references, table captions, and the bibliography entry are properly formatted for IEEEtran.",
+      "student_verification": "I compiled the LaTeX file to PDF and visually confirmed the page count, section ordering, and that all figures and tables render correctly with proper captions and cross-references.",
+      "confidence_level": 5,
+      "task_tag": "Task 4.2 – LLM Usage Disclosure",
+      "code_used_verbatim": false,
+      "student_modification": "LLM outputs were used for guidance and explanations; code and experiments were implemented and modified by the student."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "Verify that my partB/ directory contains all required files for submission.",
+      "why_important": "Ensuring repository completeness before submission prevents missing-file penalties and confirms the project structure matches the assignment specification."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 2,
+      "prompt": "Does my IEEE-style LaTeX report cover all required sections and fit within the page limit?",
+      "why_important": "Validating report structure against requirements ensures no section is omitted and the document meets formatting constraints."
+    }
+  ]
+}
