@@ -1,0 +1,91 @@
+{
+  "student_metadata": {
+    "name": "Dally R",
+    "roll_number": "230143",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "task_tag": "Task 3.1 – Ablation Study",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "provider": "Anthropic (via GitHub Copilot)"
+    }
+  ],
+
+  "code_used_verbatim": false,
+  "student_modification": "LLM suggestions were adapted and integrated into the notebook implementation.",
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Designing the ablation study experiments for kernel learning",
+      "prompt": "How should I design an ablation study for the combined kernel SVM from the paper Learning Kernels with Radiuses of Minimum Enclosing Balls? I want to systematically remove components to understand their individual contributions to classification performance.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested structuring the ablation as three configurations: the full combined kernel model as baseline, a single RBF kernel SVM to test the effect of removing kernel combination, and a linear SVM to test the effect of removing nonlinear kernels entirely.",
+      "student_verification": "I verified that these three configurations correspond to meaningful ablation levels — removing combination first, then removing nonlinearity — and that they align with the paper's emphasis on both kernel selection and kernel combination.",
+      "confidence_level": 4,
+      "task_tag": "Task 3.1 – Ablation Study",
+      "code_used_verbatim": false,
+      "student_modification": "LLM suggestions were adapted and integrated into the notebook implementation."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Deciding which components to remove in each ablation step",
+      "prompt": "In my combined kernel SVM (RBF + Polynomial with probability averaging), which components should I remove for each ablation step? I want to isolate the contribution of kernel combination versus the contribution of nonlinear feature mappings.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Clarified that Ablation 1 should remove the combination mechanism while keeping one nonlinear kernel (RBF), and Ablation 2 should remove all nonlinear kernels and use only a linear SVM, so each step isolates a distinct component of the pipeline.",
+      "student_verification": "I confirmed that RBF is a reasonable choice for the single-kernel ablation since it is the most commonly used nonlinear kernel in SVM literature, and that a linear SVM provides the simplest possible baseline for comparison.",
+      "confidence_level": 4,
+      "task_tag": "Task 3.1 – Ablation Study",
+      "code_used_verbatim": false,
+      "student_modification": "LLM suggestions were adapted and integrated into the notebook implementation."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-12",
+      "tool_name": "GitHub Copilot",
+      "model": "Claude Opus 4.6",
+      "purpose": "Interpreting kernel comparison results and connecting to the paper",
+      "prompt": "The linear SVM achieved the highest accuracy in my ablation study, higher than both the RBF-only and the combined kernel models. How should I interpret this in the context of the paper's kernel learning framework?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Explained that if the dataset is largely linearly separable, nonlinear kernels may overfit or add unnecessary complexity, and that this result actually supports the paper's argument — kernel learning should identify the optimal kernel, and in this case the optimal kernel is linear. The paper's margin-radius bound would assign higher weight to the linear kernel.",
+      "student_verification": "I reviewed the dataset parameters (class_sep=1.0 with 3 informative features out of 5) and confirmed that the data is indeed mostly linearly separable, which explains why the linear kernel performs best and additional kernel complexity does not help.",
+      "confidence_level": 5,
+      "task_tag": "Task 3.1 – Ablation Study",
+      "code_used_verbatim": false,
+      "student_modification": "LLM suggestions were adapted and integrated into the notebook implementation."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "How should I design an ablation study for the combined kernel SVM from the paper Learning Kernels with Radiuses of Minimum Enclosing Balls?",
+      "why_important": "This prompt established the overall structure of the ablation study, ensuring the experiments systematically isolate each component's contribution."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 2,
+      "prompt": "Which components should I remove in each ablation step to isolate kernel combination versus nonlinear feature mappings?",
+      "why_important": "This prompt helped define the specific ablation configurations and ensured each step tests a distinct hypothesis about the model's architecture."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "The linear SVM achieved the highest accuracy — how should I interpret this in the context of the paper's kernel learning framework?",
+      "why_important": "This prompt was critical for writing the analysis sections, connecting the experimental results back to the paper's theoretical contributions."
+    }
+  ]
+}
